@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ログインページ</title>
+		<!-- BootstrapのCSS読み込み -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+    	<!-- jQuery読み込み -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    	<!-- BootstrapのJS読み込み -->
+    	<script src="js/bootstrap.min.js"></script>
+    	<!-- 通常のCSS読み込み -->
+    	<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="main_content">
+			<!--タブのボタン部分-->
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a href="#tab1" class="nav-link bg-primary" data-toggle="tab">Sign In</a>
+				</li>
+				<li class="nav-item">
+					<a href="#tab2" class="nav-link bg-primary" data-toggle="tab">Sign Up</a>
+				</li>
+			</ul>
+			<!--タブのコンテンツ部分-->
+			<div class="tab-content">
+				<div id="tab1" class="tab-pane active">
+					<form>
+						<p>ID：<input type="text" name="id" size="32"></p>
+						<p>PASS：<input type="text" name="pass" size="29"></p>
+						<p>NAME：<input type="text" name="name" size="27"></p>
+						<p><input type="button" onclick="location.href='mainmenu.html'" value="Sign In"></p>
+					</form>
+				</div>
+				<div id="tab2" class="tab-pane">
+					<form>
+						<p>ID：<input type="text" name="id" size="32"></p>
+						<p>PASS：<input type="text" name="pass" size="29"></p>
+						<p>NAME：<input type="text" name="name" size="27"></p>
+						<p><input type="button" onclick="location.href='mainmenu.html'" value="Sign Up"></p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
