@@ -4,12 +4,12 @@
 	function db_config() {
 		//
 		return array(
-			'user' => 'mikanyo',
-			'database' => 'mikanyo',
-			'pass' => 'mikanyo',
+			'user' => 'keisuke',
+			'database' => 'fileserver',
+			'pass' => '2421',
 			'host' => 'localhost',
 			'charset' => 'utf8mb4',
 		);
 	}
 
-	$up_dir = "http://dev2.m-fr.net/keisuke07/fileserver/files/";
+	$up_dir = "/var/www/html/keisuke/fileserver/files/";
