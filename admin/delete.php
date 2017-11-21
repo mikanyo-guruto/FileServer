@@ -1,23 +1,26 @@
 <?php
 	session_start();
 	ini_set('display_errors', 1);
-	require_once('./dbh.php');
 
 	function delete() {
+		require_once('./dbh.php');
+
+		// return用のフラグを用意
 		$flg = false;
 
+		// DBにアクセス
 		$dbh = get_dbh();
 		$sql = "SELECT * FROM files WHERE user_id = ? AND id = ?";
 		$pre = $dbh->prepare($sql);
 		$pre->execute(array($_SESSION['user']['id'], $_POST['file_id']));
 		$result = $pre->fetchAll();
 
-		$path = $result[0]['path'];
+		$filepath = $up_dir . $result[0]['file_name'];
 
-		if(file_exists($path)) {
+		if(file_exists($filepath)) {
 			$delsql = "DELETE FROM files WHERE user_id = ? AND id = ?";
 	    	$pre = $dbh->prepare($delsql);
-			if(unlink($path) && $pre->execute(array($_SESSION['user']['id'], $_POST['file_id']))) {
+			if(unlink($filepath) && $pre->execute(array($_SESSION['user']['id'], $_POST['file_id']))) {
 				//echo "削除しました。";
 				return true;
 			}else{

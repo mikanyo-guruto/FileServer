@@ -9,10 +9,12 @@
     $pre->execute(array($_SESSION['user']['id'], $_POST['file_id']));
     $result = $pre->fetchAll();
 
-    $filepath = $result[0]['path'];
     $filename = $result[0]['file_name'];
+    $filepath = $up_dir . $filename;
 
     header('Content-Type: application/octet-stream');
 	header('Content-Length: '.filesize($filepath));
 	header('Content-disposition: attachment; filename='.$filename);
 	readfile($filepath);
+
+    Header('Location: ../top.php');
