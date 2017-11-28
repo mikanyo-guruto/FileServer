@@ -17,11 +17,20 @@
 			<?php
 				// 一時ファイルができているか（アップロードされているか）チェック
 				if(is_uploaded_file($_FILES["upfile"]["tmp_name"])) {
-					// 一時ファイルを保存ファイルにコピーできたか
-					if(move_uploaded_file($_FILES["upfile"]["tmp_name"], "../files/". $_FILES["upfile"]["name"])){
-						chmod("../files/". $_FILES["upfile"]["name"], 0644);
-						$path = $up_dir . "{$_FILES["upfile"]["name"]}";
+					// ディレクトリ内のファイル名重複を防ぐ為にpathにはユニークな名前のディレクトリを作成する
+					$path = hash('sha512', uniqid(rand(),1), false) . "/";
+					if (!mkdir($up_dir . $path, 0777, true)) {
+						echo "ディレクトリの作成に失敗しました。";
+						header('Location: ../top.php');
+						exit;
+					}
 
+					// 一時ファイルを保存ファイルにコピーできたか
+					// なおかつ、権限の変更を加えられたか
+					if(move_uploaded_file($_FILES['upfile']['tmp_name'], 
+						"{$up_dir}{$path}{$_FILES['upfile']['name']}") && 
+						chmod("{$up_dir}{$path}{$_FILES['upfile']['name']}", 0644)) 
+					{
 						// DBへアクセス
 						$dbh = get_dbh();
 						$sql = "INSERT INTO files(user_id, dir_id, file_name, path, create_time, update_time) VALUES (:user_id, :dir_id, :file_name, :path, :create_time, :update_time)";

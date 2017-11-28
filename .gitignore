@@ -1,0 +1,3 @@
+admin/db_config.php
+files/*
+!.dumy.txt

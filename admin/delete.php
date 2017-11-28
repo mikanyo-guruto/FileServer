@@ -10,23 +10,29 @@
 
 		// DBにアクセス
 		$dbh = get_dbh();
+		// ファイル情報を読み込む
 		$sql = "SELECT * FROM files WHERE user_id = ? AND id = ?";
 		$pre = $dbh->prepare($sql);
 		$pre->execute(array($_SESSION['user']['id'], $_POST['file_id']));
-		$result = $pre->fetchAll();
+		$result = $pre->fetch(PDO::FETCH_ASSOC);
 
-		$filepath = $up_dir . $result[0]['file_name'];
-
+		// ファイルが存在しているパス
+		$filepath = "{$up_dir}{$result['path']}";
 		if(file_exists($filepath)) {
 			$delsql = "DELETE FROM files WHERE user_id = ? AND id = ?";
 	    	$pre = $dbh->prepare($delsql);
-			if(unlink($filepath) && $pre->execute(array($_SESSION['user']['id'], $_POST['file_id']))) {
+	    	// ファイルを削除する
+	    	// ディレクトリを削除する
+	    	// DBを削除する
+	    	if (unlink("{$filepath}{$result['file_name']}") && 
+	    		rmdir($filepath) && 
+	    		$pre->execute(array($_SESSION['user']['id'], $_POST['file_id']))) {
 				//echo "削除しました。";
 				return true;
-			}else{
+			} else {
 				$flg = "削除できませんでした。";
 			}
-		}else{
+		} else {
 			$flg = "ファイルが存在しません。";
 		}
 		return $flg;
