@@ -4,7 +4,6 @@
 
 	function delete() {
 		require_once('./dbh.php');
-
 		// return用のフラグを用意
 		$flg = false;
 
