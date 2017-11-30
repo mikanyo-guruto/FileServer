@@ -1,8 +1,8 @@
 <?php
 
-	// DB接続設定をreturnする
-	function db_config() {
-		//
+// DB接続設定をreturnする
+function db_config() {
+		// 
 		return array(
 			'user' => '',
 			'database' => '',
@@ -11,5 +11,4 @@
 			'charset' => 'utf8mb4',
 		);
 	}
-
 	$up_dir = realpath("../") . "/files/";
