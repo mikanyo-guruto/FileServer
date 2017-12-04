@@ -41,7 +41,7 @@
 						$pre->bindValue(':file_name', $_FILES["upfile"]["name"], PDO::PARAM_STR);
 						$pre->bindValue(':path', $path, PDO::PARAM_STR);
 						$pre->bindValue(':create_time', date("Y-m-d H:i:s") , PDO::PARAM_STR);
-						$pre->bindValue(':update_time', date("0000-00-00 00:00:00") , PDO::PARAM_STR);
+						$pre->bindValue(':update_time', date("Y-m-d H:i:s") , PDO::PARAM_STR);
 						
 						if ($pre->execute()) {
 							echo $_FILES["upfile"]["name"]."をアップロードしました。";
