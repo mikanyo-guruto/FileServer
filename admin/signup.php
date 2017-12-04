@@ -38,9 +38,9 @@
                 //$userid = $pdo->lastinsertid();  // 登録した(DB側でauto_incrementした)IDを$useridに入れる
 
                 $dbh = get_dbh();
-                $sql = "INSERT INTO users(user_id, name, pass) VALUES(?, ?, ?)";
+                $sql = "INSERT INTO users(user_id, name, pass, create_time) VALUES(?, ?, ?, ?)";
                 $pre = $dbh->prepare($sql);
-                $pre->execute(array($userid, $username, password_hash($pass, PASSWORD_DEFAULT)));
+                $pre->execute(array($userid, $username, password_hash($pass, PASSWORD_DEFAULT), date("Y-m-d H:i:s")));
                 //$userid = $dbh->lastinsertid();
 
                 $signUpMessage = '登録が完了しました。';  // ログイン時に使用するIDとパスワード
