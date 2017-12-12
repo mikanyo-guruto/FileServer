@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,6 +7,13 @@
     </head>
     <body>
         <h1>ログイン画面</h1>
+
+        <?php if (isset($_SESSION['msg'])) { ?>
+            <div class="message_area">
+                <p><?php echo $_SESSION['msg']; ?></p>
+            </div>
+        <?php unset($_SESSION['msg']); } ?>
+
         <form action="admin/login.php" method="post">
             <fieldset>
                 <legend>ログインフォーム</legend>

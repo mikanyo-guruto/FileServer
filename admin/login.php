@@ -3,8 +3,9 @@
 	ini_set('display_errors', 1);
 
 	// 共通エラー処理
-	function error() {
+	function redirect($msg) {
 		// indexに返す
+		$_SESSION['msg'] = $msg;
 		header('Location: ../index.php');
 		exit;
 	}
@@ -15,7 +16,6 @@
 	//
 	require_once('./dbh.php');
 
-
 	// 画面入力のIDとパスワードを取得
 	$id = (string)@$_POST['id'];
 	$pw = (string)@$_POST['pw'];
@@ -23,7 +23,7 @@
 	// varidate
 	if ( ('' === $id) ||('' === $pw) ) {
 		// エラー処理
-		error();
+		redirect("IDとパスワードを入力してください。");
 	}
 
 	/*
@@ -43,23 +43,21 @@
 	$r = $pre->execute();
 	if (false === $r) {
 		// エラー処理
-		echo 'DBでエラーが発生しました。';
-		echo $pre->errorInfo();
-		exit;
+		redirect("DBでエラーが発生しています。");
 	}
 
 	// データを取得する
 	$admin_user = $pre->fetch(PDO::FETCH_ASSOC);
 	if (false === $admin_user) {
 		// エラー処理
-		error();
+		redirect("IDかパスワードが間違っています。");
 	}
 
 	// IDとパスワードを比較
 	$r = password_verify($pw, $admin_user['pass']);
 	if (false === $r) {
 		// エラー処理
-		error();
+		redirect("IDかパスワードが間違っています。");
 	}
 
 	// 認証okなら許可用の準備をする
