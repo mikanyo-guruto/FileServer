@@ -3,6 +3,13 @@
 	ini_set('display_errors', 1);
     require_once('./dbh.php');
 
+    function redirect($msg) {
+        // indexに返す
+        $_SESSION['msg'] = $msg;
+        header('Location: ../index.php');
+        exit;
+    }
+
 	$dbh = get_dbh();
     $sql = "SELECT * FROM files WHERE user_id = ? AND id = ?";
     $pre = $dbh->prepare($sql);
@@ -22,7 +29,7 @@
         header("Connection: close");
     	readfile($filepath);
     } else {
-    	echo "ファイルが存在しません。";
+    	redirect("ファイルが存在しません。");
     }
 
     // ヘッダの送信チェックにheaders_sent()を使ったほうがいいかもしれない

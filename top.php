@@ -30,6 +30,12 @@
 		<!-- ユーザーIDにHTMLタグが含まれても良いようにエスケープする -->
 		<p>ようこそ<u><?php echo htmlspecialchars($_SESSION['user']['name'], ENT_QUOTES); ?></u>さん</p> <!-- ユーザー名をechoで表示 -->
 
+        <?php if (isset($_SESSION['msg'])) { ?>
+            <div class="message_area">
+                <p><?php echo $_SESSION['msg']; ?></p>
+            </div>
+        <?php unset($_SESSION['msg']); } ?>
+
 		<div id="tabmenu">
 
 			<div id="tab">
