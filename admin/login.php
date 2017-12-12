@@ -62,7 +62,7 @@
 
 	// 認証okなら許可用の準備をする
 	session_regenerate_id(true); // 脆弱性対策
-	$_SESSION['users'][':user_id'] = $id;
+	//$_SESSION['users'][':user_id'] = $id;
 	$_SESSION['user'] = array('name'=>$admin_user['name'], 'id'=>$admin_user['id']);
 
 	// ログイン後にメイン画面に遷移
