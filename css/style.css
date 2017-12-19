@@ -54,7 +54,7 @@ ul {
     position:fixed;
     display:none;
     z-index:2;
-    height: auto;
+    height: 500px;
     width:820px;
     margin:0;
     padding:10px 20px;
@@ -98,7 +98,12 @@ ul {
     color:#f00;
 }
 
-.modal-content object #document html body img {
-    width: 790px;
-    height: auto;
+/* object要素 */
+.object-target {
+    height: 490px;
+    overflow-y: scroll;
+}
+
+.object-target object {
+    width: 100%;
 }

@@ -58,7 +58,13 @@
 										<tr>
 											<td class="hoge1"><a data-target="<?php echo $key['id']; ?>" class="modal-open"><?php echo $key['file_name']; ?></a>
 												<div id="<?php echo $key['id']; ?>" class="modal-content">
+													<!--
 													<object type="text/html" data="<?php echo "./files/" . $key['path'] . $key['file_name']; ?>" width="100%" height="500px"></object>
+													<p><a class="modal-close">閉じる</a></p>
+													-->
+													<div class="object-target">
+														<object data="<?php echo "./files/" . $key['path'] . $key['file_name']; ?>"></object>
+													</div>
 													<p><a class="modal-close">閉じる</a></p>
 												</div>
 											</td>
