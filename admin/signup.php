@@ -7,7 +7,7 @@
     function redirect($msg) {
         // indexに返す
         $_SESSION['msg'] = $msg;
-        header('Location: ../index.php');
+        header('Location: ../signuppage.php');
         exit;
     }
 
@@ -27,19 +27,28 @@
             redirect('パスワードが未入力です。');
         }
 
-
         // 2. ユーザIDとパスワードが入力されていたら認証する
         //$dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
 
-        // 3. エラー処理
+        // 3. ユーザ登録処理
         try {
             $dbh = get_dbh();
             $sql = "INSERT INTO users(user_id, name, pass, create_time) VALUES(?, ?, ?, ?)";
             $pre = $dbh->prepare($sql);
-            $pre->execute(array($userid, $username, password_hash($pass, PASSWORD_DEFAULT), date("Y-m-d H:i:s")));
-            //$userid = $dbh->lastinsertid();
+            $r = $pre->execute(array($userid, $username, password_hash($pass, PASSWORD_DEFAULT), date("Y-m-d H:i:s")));
+            
+            // エラー処理
+            switch ($r) {
+                // 既に使われているID
+                case $r[0] == '1022' || $r[0] == '1062':
+                    redirect('このIDは既に使用されています。');
+            }
 
-            redirect('登録が完了しました。');  // ログイン時に使用するIDとパスワード
+            $_SESSION['msg'] = "登録が完了しました。";
+            header('Location: ../index.php');
+            exit;
+            //$userid = $dbh->lastinsertid();
+            
         } catch (PDOException $e) {
             redirect('DBで何らかのエラーが発生しました。');
             echo $e->getMessage(); // でエラー内容を参照可能（デバック時のみ表示）
