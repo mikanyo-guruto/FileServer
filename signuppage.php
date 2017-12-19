@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html>
     <head>
@@ -26,7 +27,7 @@
             </fieldset>
         </form>
         <br>
-        <form action="login.php">
+        <form action="index.php">
             <input type="submit" value="戻る">
         </form>
     </body>

@@ -4,9 +4,9 @@
 function db_config() {
 		// 
 		return array(
-			'user' => '',
-			'database' => '',
-			'pass' => '',
+			'user' => 'mikanyo',
+			'database' => 'mikanyo',
+			'pass' => 'mikanyo',
 			'host' => 'localhost',
 			'charset' => 'utf8mb4',
 		);
